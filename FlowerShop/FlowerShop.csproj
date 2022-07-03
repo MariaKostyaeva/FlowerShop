@@ -35,8 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +65,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UC\UserControl_ProductCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Page_Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Page_ProductList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Page_Sidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Window_Start.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,8 +89,64 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Class\Authorization.cs" />
+    <Compile Include="Class\Manager.cs" />
+    <Compile Include="Database\Category.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\FS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\ImageProduct.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Manufacturer.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Position.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Product.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\sysdiagrams.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\UnitOfMeasurement.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\User.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\View_InfoProduct.cs">
+      <DependentUpon>FS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserControl_ProductCard.xaml.cs">
+      <DependentUpon>UserControl_ProductCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Page_Authorization.xaml.cs">
+      <DependentUpon>Page_Authorization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Page_ProductList.xaml.cs">
+      <DependentUpon>Page_ProductList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Page_Sidebar.xaml.cs">
+      <DependentUpon>Page_Sidebar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window_Start.xaml.cs">
+      <DependentUpon>Window_Start.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -86,6 +168,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Database\FS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\FS.edmx.diagram">
+      <DependentUpon>FS.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +183,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cactus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\no_photo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\FS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FS.edmx</DependentUpon>
+      <LastGenOutput>FS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\FS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FS.edmx</DependentUpon>
+      <LastGenOutput>FS.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
